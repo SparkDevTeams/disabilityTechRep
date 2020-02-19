@@ -9,7 +9,16 @@
     <fragment
         android:id="@+id/list"
         android:name="com.example.myapplication.TimerFragment"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <fragment
+        android:id="@+id/list2"
+        android:name="com.example.myapplication.ButtonFragment"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
         app:layout_constraintEnd_toEndOf="parent"
