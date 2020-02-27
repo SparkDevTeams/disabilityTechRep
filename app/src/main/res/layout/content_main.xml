@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".MainActivity"
+    tools:showIn="@layout/activity_main">
+
+    <Button
+        android:id="@+id/btnTimerPage1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Timer"
+        app:layout_constraintBottom_toBottomOf="@+id/btnNotePage1"
+        app:layout_constraintStart_toEndOf="@+id/btnNotePage1" />
+
+    <Button
+        android:id="@+id/btnTimerPage2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Timer"
+        app:layout_constraintBottom_toBottomOf="@+id/btnNotePage2"
+        app:layout_constraintStart_toEndOf="@+id/btnNotePage2" />
+
+    <Button
+        android:id="@+id/btnTimerPage3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Timer"
+        app:layout_constraintBottom_toBottomOf="@+id/btnNotePage3"
+        app:layout_constraintStart_toEndOf="@+id/btnNotePage3" />
+
+    <Button
+        android:id="@+id/btnTimerPage4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Timer"
+        app:layout_constraintBottom_toBottomOf="@+id/btnNotePage4"
+        app:layout_constraintStart_toEndOf="@+id/btnNotePage4" />
+
+    <Button
+        android:id="@+id/btnNotePage2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Notes"
+        app:layout_constraintBottom_toBottomOf="@+id/txtClient2"
+        app:layout_constraintStart_toEndOf="@+id/txtClient2"
+        app:layout_constraintTop_toTopOf="@+id/txtClient2" />
+
+    <Button
+        android:id="@+id/btnNotePage3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Notes"
+        app:layout_constraintBottom_toBottomOf="@+id/txtClient3"
+        app:layout_constraintStart_toEndOf="@+id/txtClient3"
+        app:layout_constraintTop_toTopOf="@+id/txtClient3" />
+
+    <Button
+        android:id="@+id/btnNotePage4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Notes"
+        app:layout_constraintBottom_toBottomOf="@+id/txtClient4"
+        app:layout_constraintStart_toEndOf="@+id/txtClient4"
+        app:layout_constraintTop_toTopOf="@+id/txtClient4" />
+
+    <Button
+        android:id="@+id/btnNotePage1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Notes"
+        app:layout_constraintBottom_toBottomOf="@+id/txtClient1"
+        app:layout_constraintStart_toEndOf="@+id/txtClient1"
+        app:layout_constraintTop_toTopOf="@+id/txtClient1" />
+
+    <TextView
+        android:id="@+id/txtClient1"
+        android:layout_width="93dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="60dp"
+        android:gravity="center|center_horizontal"
+        android:text="Client 1"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintBottom_toTopOf="@+id/txtClient2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.273"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txtClient2"
+        android:layout_width="93dp"
+        android:layout_height="54dp"
+        android:gravity="center|center_horizontal"
+        android:text="Client 2"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintBottom_toTopOf="@+id/txtClient3"
+        app:layout_constraintStart_toStartOf="@+id/txtClient1"
+        app:layout_constraintTop_toBottomOf="@+id/txtClient1" />
+
+    <TextView
+        android:id="@+id/txtClient4"
+        android:layout_width="93dp"
+        android:layout_height="54dp"
+        android:gravity="center|center_horizontal"
+        android:text="Client 4"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/txtClient3"
+        app:layout_constraintTop_toBottomOf="@+id/txtClient3" />
+
+    <TextView
+        android:id="@+id/txtClient3"
+        android:layout_width="93dp"
+        android:layout_height="54dp"
+        android:gravity="center|center_horizontal"
+        android:text="Client 3"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintBottom_toTopOf="@+id/txtClient4"
+        app:layout_constraintStart_toStartOf="@+id/txtClient2"
+        app:layout_constraintTop_toBottomOf="@+id/txtClient2" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
