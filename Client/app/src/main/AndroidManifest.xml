@@ -9,15 +9,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".c3Notes"></activity>
+        <activity android:name=".c2Notes" />
+        <activity android:name=".c1Notes" />
         <activity
             android:name=".cTimer"
-            android:label="CTimer"></activity>
+            android:label="Client 3 Timer" />
         <activity
             android:name=".bTimer"
-            android:label="BTimer"></activity>
+            android:label="Client 2 Timer" />
         <activity
             android:name=".aTimer"
-            android:label="ATimer"></activity>
+            android:label="Client 1 Timer" />
         <activity android:name=".Trial1Timer" />
         <activity android:name=".MainActivity">
             <intent-filter>
