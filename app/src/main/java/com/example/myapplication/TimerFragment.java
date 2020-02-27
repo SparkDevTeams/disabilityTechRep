@@ -1,8 +1,10 @@
 package com.example.myapplication;
 
 import android.app.Fragment;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,11 +13,15 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
+/*
+* alarmSound is being called when it's null, since it's being called
+* early. We should initialize alarm before set button gets pressed.
+* */
 public class TimerFragment extends Fragment {
     View v;
     private EditText mEditTextInput;
     private TextView mTextViewCountdown;
+
     private Button mButtonSet;
     private Button mButtonStartPause;
     private Button mButtonReset;
@@ -27,10 +33,9 @@ public class TimerFragment extends Fragment {
     private boolean mTimerRunning;
     public long mStartTimeInMillis;
     private long mTimeLeftInMillis = mStartTimeInMillis;
+    MediaPlayer alarmSound;
 
-    public TimerFragment() {
-
-    }
+    public TimerFragment() {}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -51,21 +56,23 @@ public class TimerFragment extends Fragment {
         mButtonSet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                try{
+                    String input = mEditTextInput.getText().toString();
+                    if (input.length() == 0) {
+                        Toast.makeText(getActivity(), "Field can't be empty.", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    long millisInput = Long.parseLong(input) * 60000;
 
-                String input = mEditTextInput.getText().toString();
-                if (input.length() == 0) {
-                    Toast.makeText(getActivity(), "Field can't be empty.", Toast.LENGTH_SHORT).show();
-                    return;
+                    if (millisInput == 0) {
+                        Toast.makeText(getActivity(), "Please enter a positive number  ", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    setTime(millisInput);
+                    mEditTextInput.setText("");
+                } catch(Exception e) {
+                    System.out.println("---------ERROR on Set: "+e+" ----------");
                 }
-                long millisInput = Long.parseLong(input) * 60000;
-
-                if (millisInput == 0) {
-                    Toast.makeText(getActivity(), "Please enter a positive number  ", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                setTime(millisInput);
-                mEditTextInput.setText("");
-
             }
         });
         mButtonStartPause.setOnClickListener(new View.OnClickListener() {
@@ -99,31 +106,41 @@ public class TimerFragment extends Fragment {
     }
 
     private void startTimer() {
-        mCountdownTimer = new CountDownTimer(mTimeLeftInMillis, 1000) {
+        if(mTimeLeftInMillis == 0){
+            Toast.makeText(getActivity(), "You must set a time", Toast.LENGTH_SHORT).show();
+        } else {
+            mCountdownTimer = new CountDownTimer(mTimeLeftInMillis, 1000) {
 
 
-            @Override
-            public void onTick(long millisUntilFinished) {
-                mTimeLeftInMillis = millisUntilFinished;
-                updateCountDownText();
-                updateProgressBar();
-            }
+                @Override
+                public void onTick(long millisUntilFinished) {
+                    mTimeLeftInMillis = millisUntilFinished;
+                    updateCountDownText();
+                    updateProgressBar();
+                }
 
 
-            @Override
-            public void onFinish() {
-                mTimerRunning = false;
-                mButtonStartPause.setText("Start");
-                mButtonStartPause.setVisibility(View.INVISIBLE);
-                mButtonReset.setVisibility(View.VISIBLE);
-            }
-        }.start();
+                @Override
+                public void onFinish() {
+                    try {
+                        alarmSound = MediaPlayer.create(getActivity(), R.raw.acoustic_guitar_alarm_ringtone);
+                        alarmSound.start();
+                    }catch(Exception e){
+                        Log.e("Error", "---------ERROR: "+e+" ----------");
+                    }
+                    mTimerRunning = false;
+                    mButtonStartPause.setText("Start");
+                    mButtonStartPause.setVisibility(View.INVISIBLE);
+                    mButtonReset.setVisibility(View.VISIBLE);
+                }
+            }.start();
 
-        mTimerRunning = true;
-        mButtonStartPause.setText("pause");
-        mButtonReset.setVisibility(View.INVISIBLE);
-        mButtonSet.setVisibility(View.INVISIBLE);
-        mEditTextInput.setVisibility(View.INVISIBLE);
+            mTimerRunning = true;
+            mButtonStartPause.setText("pause");
+            mButtonReset.setVisibility(View.INVISIBLE);
+            mButtonSet.setVisibility(View.INVISIBLE);
+            mEditTextInput.setVisibility(View.INVISIBLE);
+        }
     }
 
     private void pauseTimer() {
@@ -134,6 +151,7 @@ public class TimerFragment extends Fragment {
     }
 
     private void resetTimer() {
+        alarmSound.stop();
         mButtonSet.setVisibility(View.VISIBLE);
         mEditTextInput.setVisibility(View.VISIBLE);
         mTimeLeftInMillis = mStartTimeInMillis;
