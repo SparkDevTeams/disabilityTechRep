@@ -9,9 +9,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".c3Notes"></activity>
-        <activity android:name=".c2Notes" />
-        <activity android:name=".c1Notes" />
+        <activity
+            android:name=".c3Notes"
+            android:label="Client 3 Notes" />
+        <activity
+            android:name=".c2Notes"
+            android:label="Client 2 Notes" />
+        <activity
+            android:name=".c1Notes"
+            android:label="Client 1 Notes" />
         <activity
             android:name=".cTimer"
             android:label="Client 3 Timer" />

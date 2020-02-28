@@ -14,6 +14,9 @@ public class MainActivity extends AppCompatActivity {
     private Button trialA;
     private Button trialB;
     private Button trialC;
+    private Button btnNote1;
+    private Button btnNote2;
+    private Button btnNote3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +43,31 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, cTimer.class));
             }
         });
+
+        btnNote1 = findViewById(R.id.notes1);
+        btnNote1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, c1Notes.class));
+            }
+        });
+
+        btnNote2 = findViewById(R.id.notes2);
+        btnNote2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, c2Notes.class));
+            }
+        });
+
+        btnNote3 = findViewById(R.id.notes3);
+        btnNote3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, c3Notes.class));
+            }
+        });
+
     }
 }
 

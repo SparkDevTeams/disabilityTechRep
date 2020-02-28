@@ -2,6 +2,7 @@ package com.example.client;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 
@@ -31,6 +32,7 @@ public class cTimer extends AppCompatActivity {
     private Button mButtonSet;
     private Button mButtonStartPause;
     private Button mButtonReset;
+    private Button mButtonToMain;
 
     private ProgressBar mProgressBar;
     private CountDownTimer mCountdownTimer;
@@ -95,6 +97,16 @@ public class cTimer extends AppCompatActivity {
             }
         });
         updateCountDownText();
+
+        mButtonToMain = findViewById(R.id.mainButton); //connects t xml
+        mButtonToMain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(cTimer.this, MainActivity.class));
+            }
+        });
+
+
 
     }
 
