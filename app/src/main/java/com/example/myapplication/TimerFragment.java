@@ -33,12 +33,15 @@ public class TimerFragment extends Fragment {
     private boolean mTimerRunning;
     public long mStartTimeInMillis;
     private long mTimeLeftInMillis = mStartTimeInMillis;
-    MediaPlayer alarmSound;
+    public MediaPlayer alarmSound; //alarm sound can't be initialized in this spot for the audio -Alonzo Jasmin 2/27/2019
 
     public TimerFragment() {}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        //bug occured due to alarmSound not initializing earlier. Added hear to be the first step -Alonzo Jasmin 2/27/2019
+        alarmSound = MediaPlayer.create(getActivity(), R.raw.acoustic_guitar_alarm_ringtone);
+
         v = inflater.inflate(R.layout.timer_fragment_layout, container, false);
 
         mEditTextInput = v.findViewById(R.id.edit_text_input);
@@ -114,6 +117,7 @@ public class TimerFragment extends Fragment {
 
                 @Override
                 public void onTick(long millisUntilFinished) {
+
                     mTimeLeftInMillis = millisUntilFinished;
                     updateCountDownText();
                     updateProgressBar();
@@ -122,16 +126,22 @@ public class TimerFragment extends Fragment {
 
                 @Override
                 public void onFinish() {
-                    try {
-                        alarmSound = MediaPlayer.create(getActivity(), R.raw.acoustic_guitar_alarm_ringtone);
+                 /*   try {
                         alarmSound.start();
                     }catch(Exception e){
                         Log.e("Error", "---------ERROR: "+e+" ----------");
                     }
+                 */
+
                     mTimerRunning = false;
+                    //starts the audio once time reaches zero --Alonzo Jasmin 2/27/2019
+                    alarmSound.start();
+                    //System.out.println("on finish"); debugging purpose -Alonzo Jasmin 2/27/2019
                     mButtonStartPause.setText("Start");
                     mButtonStartPause.setVisibility(View.INVISIBLE);
                     mButtonReset.setVisibility(View.VISIBLE);
+
+
                 }
             }.start();
 
@@ -151,7 +161,7 @@ public class TimerFragment extends Fragment {
     }
 
     private void resetTimer() {
-        alarmSound.stop();
+
         mButtonSet.setVisibility(View.VISIBLE);
         mEditTextInput.setVisibility(View.VISIBLE);
         mTimeLeftInMillis = mStartTimeInMillis;
@@ -159,7 +169,11 @@ public class TimerFragment extends Fragment {
         mButtonReset.setVisibility(View.INVISIBLE);
         mButtonStartPause.setVisibility(View.VISIBLE);
         mProgressBar.setProgress(mProgressBar.getMax());
-
+        //when reset is clicked it checks if audio is playing then stops the audio -Alonzo Jasmin 2/27/2019
+        if(alarmSound.isPlaying()) {
+            alarmSound.stop();
+            //System.out.println("stops music");    used for debugging -Alonzo Jasmin 2/27/2019
+        }
     }
 
     private void updateCountDownText() {
