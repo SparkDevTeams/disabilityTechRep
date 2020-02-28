@@ -136,6 +136,8 @@ public class TimerFragment extends Fragment {
                     mTimerRunning = false;
                     //starts the audio once time reaches zero --Alonzo Jasmin 2/27/2019
                     alarmSound.start();
+                    //keeps audio in loop
+                    alarmSound.setLooping(true);
                     //System.out.println("on finish"); debugging purpose -Alonzo Jasmin 2/27/2019
                     mButtonStartPause.setText("Start");
                     mButtonStartPause.setVisibility(View.INVISIBLE);
