@@ -13,6 +13,9 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.io.IOException;
+
 /*
 * alarmSound is being called when it's null, since it's being called
 * early. We should initialize alarm before set button gets pressed.
@@ -134,11 +137,12 @@ public class TimerFragment extends Fragment {
                  */
 
                     mTimerRunning = false;
-                    //starts the audio once time reaches zero --Alonzo Jasmin 2/27/2019
+                    //starts the audio once time reaches zero --Alonzo Jasmin 2/27/2020
+
                     alarmSound.start();
                     //keeps audio in loop
                     alarmSound.setLooping(true);
-                    //System.out.println("on finish"); debugging purpose -Alonzo Jasmin 2/27/2019
+                    //System.out.println("on finish"); debugging purpose -Alonzo Jasmin 2/27/2020
                     mButtonStartPause.setText("Start");
                     mButtonStartPause.setVisibility(View.INVISIBLE);
                     mButtonReset.setVisibility(View.VISIBLE);
@@ -171,10 +175,16 @@ public class TimerFragment extends Fragment {
         mButtonReset.setVisibility(View.INVISIBLE);
         mButtonStartPause.setVisibility(View.VISIBLE);
         mProgressBar.setProgress(mProgressBar.getMax());
-        //when reset is clicked it checks if audio is playing then stops the audio -Alonzo Jasmin 2/27/2019
+        //when reset is clicked it checks if audio is playing then stops the audio -Alonzo Jasmin 2/27/2020
         if(alarmSound.isPlaying()) {
             alarmSound.stop();
-            //System.out.println("stops music");    used for debugging -Alonzo Jasmin 2/27/2019
+            //sets the mediaPlayer to end state -Alonzo Jasmin / Andre Marin 3/2/2020
+            alarmSound.reset();
+            //prevents media objects to fall back and fail altogether -Alonzo Jasmin 3/2/2020
+            alarmSound.release();
+            //sets alarm sound back to proper media and file location -Alonzo Jasmin 3/2/2020
+            alarmSound = MediaPlayer.create(getActivity(), R.raw.acoustic_guitar_alarm_ringtone);
+            //System.out.println("stops music");    used for debugging -Alonzo Jasmin 2/27/2020
         }
     }
 
