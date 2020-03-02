@@ -24,7 +24,7 @@ public class aTimer extends AppCompatActivity {
     private Button mButtonToMain;
     private ProgressBar mProgressBar;
     private CountDownTimer mCountdownTimer;
-
+    private Button mButtonToNotesC1;
 
     private boolean mTimerRunning;
     public long mStartTimeInMillis;
@@ -94,6 +94,13 @@ public class aTimer extends AppCompatActivity {
             }
         });
 
+        mButtonToNotesC1 = findViewById(R.id.btnToC1Notes); //connects t xml
+        mButtonToNotesC1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(aTimer.this, c1Notes.class));
+            }
+        });
 
     }
 

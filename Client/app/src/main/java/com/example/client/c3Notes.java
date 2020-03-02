@@ -10,6 +10,7 @@ import android.widget.Button;
 public class c3Notes extends AppCompatActivity {
 
     private Button mButtonToMain;
+    private Button mButtonToTimerC3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +25,13 @@ public class c3Notes extends AppCompatActivity {
             }
         });
 
+        mButtonToTimerC3 = findViewById(R.id.btnToC3Timer); //connects t xml
+        mButtonToTimerC3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(c3Notes.this, cTimer.class));
+            }
+        });
 
     }
 }

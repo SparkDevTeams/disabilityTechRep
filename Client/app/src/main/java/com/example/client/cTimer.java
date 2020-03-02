@@ -33,6 +33,7 @@ public class cTimer extends AppCompatActivity {
     private Button mButtonStartPause;
     private Button mButtonReset;
     private Button mButtonToMain;
+    private Button mButtonToNotesC3;
 
     private ProgressBar mProgressBar;
     private CountDownTimer mCountdownTimer;
@@ -106,6 +107,13 @@ public class cTimer extends AppCompatActivity {
             }
         });
 
+        mButtonToNotesC3 = findViewById(R.id.btnToC3Notes); //connects t xml
+        mButtonToNotesC3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(cTimer.this, c3Notes.class));
+            }
+        });
 
 
     }
