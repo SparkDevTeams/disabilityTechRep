@@ -6,26 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-
-    <LinearLayout
-        android:id="@+id/ll"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-
-
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-
-    </LinearLayout>
-
     <Button
         android:id="@+id/count"
-        android:layout_width="167dp"
+        android:layout_width="match_parent"
         android:layout_height="47dp"
         android:text="Counter"
+        android:layout_weight="1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -33,21 +19,26 @@
 
     <Button
         android:id="@+id/x"
-        android:layout_width="54dp"
+        android:layout_width="0dp"
         android:layout_height="43dp"
         android:text="X"
+        android:layout_weight="1"
         app:layout_constraintBottom_toTopOf="@+id/count"
-        app:layout_constraintStart_toEndOf="@+id/editText" />
+        app:layout_constraintEnd_toEndOf="@id/count"
+        app:layout_constraintStart_toEndOf="@+id/editText"
+        />
 
     <EditText
         android:id="@+id/editText"
-        android:layout_width="113dp"
+        android:layout_width="0dp"
         android:layout_height="43dp"
+        android:layout_marginRight="5dp"
         android:ems="10"
+        android:layout_weight="2"
         android:inputType="textPersonName"
         android:text="Name"
         app:layout_constraintBottom_toTopOf="@+id/count"
-        app:layout_constraintStart_toStartOf="@+id/count" />
-
-
+        app:layout_constraintStart_toStartOf="@+id/count"
+        app:layout_constraintEnd_toStartOf="@id/x"
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>

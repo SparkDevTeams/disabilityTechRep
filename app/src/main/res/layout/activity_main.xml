@@ -15,15 +15,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <fragment
-        android:id="@+id/list2"
-        android:name="com.example.myapplication.ButtonFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <Button
         android:id="@+id/addFragmentButton"
         android:layout_width="391dp"
@@ -45,8 +36,94 @@
         app:layout_constraintBottom_toTopOf="@+id/addFragmentButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
+        <TableRow>
+            <fragment
+                android:id="@+id/behavior1"
+                android:name="com.example.myapplication.ButtonFragment"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginRight="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+            <fragment
+                android:id="@+id/behavior2"
+                android:name="com.example.myapplication.ButtonFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginRight="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+            <fragment
+                android:id="@+id/behavior3"
+                android:name="com.example.myapplication.ButtonFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginRight="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+        </TableRow>
 
+        <TableRow>
+            <fragment
+                android:id="@+id/behavior4"
+                android:name="com.example.myapplication.ButtonFragment"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginRight="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+            <fragment
+                android:id="@+id/behavior5"
+                android:name="com.example.myapplication.ButtonFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginRight="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+            <fragment
+                android:id="@+id/behavior6"
+                android:name="com.example.myapplication.ButtonFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginRight="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+        </TableRow>
+
+        <TableRow>
+            <fragment
+                android:id="@+id/behavior7"
+                android:name="com.example.myapplication.ButtonFragment"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginRight="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+            <fragment
+                android:id="@+id/behavior8"
+                android:name="com.example.myapplication.ButtonFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginRight="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+            <fragment
+                android:id="@+id/behavior9"
+                android:name="com.example.myapplication.ButtonFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginRight="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+        </TableRow>
     </TableLayout>
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>
