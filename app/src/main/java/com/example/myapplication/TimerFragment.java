@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 /*
 * alarmSound is being called when it's null, since it's being called
@@ -34,6 +40,7 @@ public class TimerFragment extends Fragment {
 
 
     private boolean mTimerRunning;
+    private boolean mChronometerRunning;
     public long mStartTimeInMillis;
     private long mTimeLeftInMillis = mStartTimeInMillis;
     public MediaPlayer alarmSound; //alarm sound can't be initialized in this spot for the audio -Alonzo Jasmin 2/27/2019
@@ -86,6 +93,8 @@ public class TimerFragment extends Fragment {
             public void onClick(View v) {
                 if (mTimerRunning) {
                     pauseTimer();
+                } else if (mChronometerRunning) {
+                    pauseChronometer();
                 } else {
                     startTimer();
                 }
@@ -113,29 +122,30 @@ public class TimerFragment extends Fragment {
 
     private void startTimer() {
         if(mTimeLeftInMillis == 0){
-            Toast.makeText(getActivity(), "You must set a time", Toast.LENGTH_SHORT).show();
+            final Handler handler = new Handler();
+            Runnable countUp = new Runnable() {
+                public void run() {
+                    updateCountUpText();
+                    handler.postDelayed(this, 1000);
+                }
+            };
+            handler.postDelayed(countUp, 1000);
+            mChronometerRunning = true;
+            mButtonStartPause.setText("pause");
+            mButtonReset.setVisibility(View.INVISIBLE);
+            mButtonSet.setVisibility(View.INVISIBLE);
+            mEditTextInput.setVisibility(View.INVISIBLE);
         } else {
             mCountdownTimer = new CountDownTimer(mTimeLeftInMillis, 1000) {
-
-
                 @Override
                 public void onTick(long millisUntilFinished) {
-
                     mTimeLeftInMillis = millisUntilFinished;
                     updateCountDownText();
                     updateProgressBar();
                 }
 
-
                 @Override
                 public void onFinish() {
-                 /*   try {
-                        alarmSound.start();
-                    }catch(Exception e){
-                        Log.e("Error", "---------ERROR: "+e+" ----------");
-                    }
-                 */
-
                     mTimerRunning = false;
                     //starts the audio once time reaches zero --Alonzo Jasmin 2/27/2020
 
@@ -146,8 +156,6 @@ public class TimerFragment extends Fragment {
                     mButtonStartPause.setText("Start");
                     mButtonStartPause.setVisibility(View.INVISIBLE);
                     mButtonReset.setVisibility(View.VISIBLE);
-
-
                 }
             }.start();
 
@@ -164,6 +172,10 @@ public class TimerFragment extends Fragment {
         mTimerRunning = false;
         mButtonStartPause.setText("Start");
         mButtonReset.setVisibility(View.VISIBLE);
+    }
+
+    private void pauseChronometer() {
+        Toast.makeText(getActivity(), "I supposed to be pausing!", Toast.LENGTH_SHORT).show();
     }
 
     private void resetTimer() {
@@ -193,6 +205,23 @@ public class TimerFragment extends Fragment {
         int seconds = (int) (mTimeLeftInMillis / 1000) % 60;
 
         String timeLeftFormatted = String.format("%02d:%02d", minutes, seconds);
+
+        mTextViewCountdown.setText(timeLeftFormatted);
+    }
+
+    private void updateCountUpText() {
+        String minutes = ((String) mTextViewCountdown.getText()).substring(0,2);
+        String seconds = ((String) mTextViewCountdown.getText()).substring(3);
+        int minInt = Integer.parseInt(minutes);
+        int secInt = Integer.parseInt(seconds);
+        if(secInt == 59){
+            minInt++;
+            secInt = 0;
+        } else {
+            secInt++;
+        }
+
+        String timeLeftFormatted = String.format("%02d:%02d", minInt, secInt);
 
         mTextViewCountdown.setText(timeLeftFormatted);
     }
