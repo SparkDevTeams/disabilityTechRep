@@ -60,9 +60,9 @@
         android:id="@+id/edit_text_input"
         android:layout_width="82dp"
         android:layout_height="42dp"
-        android:hint="Minutes"
-        android:inputType="number"
-        android:maxLength="4"
+        android:hint="MM:SS"
+        android:inputType="time"
+        android:maxLength="5"
         app:layout_constraintBottom_toTopOf="@+id/text_view_countdown"
         app:layout_constraintStart_toStartOf="@+id/text_view_countdown" />
 

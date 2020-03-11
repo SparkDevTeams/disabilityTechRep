@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.ExecutorService;
@@ -75,7 +76,27 @@ public class TimerFragment extends Fragment {
                         Toast.makeText(getActivity(), "Field can't be empty.", Toast.LENGTH_SHORT).show();
                         return;
                     }
-                    long millisInput = Long.parseLong(input) * 60000;
+                    String[] token = input.split(":");
+                    if(token.length == 0){
+                        token = new String[2];
+                        token[0] = "0";
+                        token[1] = "0";
+                    } else if (token.length == 1) {
+                        if(input.charAt(0) == ':'){
+                            String secs = token[0];
+                            token = new String[2];
+                            token[0] = "0";
+                            token[1] = secs;
+                        } else {
+                            String mins = token[0];
+                            token = new String[2];
+                            token[0] = mins;
+                            token[1] = "0";
+                        }
+                    }
+                    if(token[0].length() == 0) token[0] = "0";
+                    long millisInput = Long.parseLong(token[0]) * 60000;
+                    millisInput += Long.parseLong(token[1]) * 1000;
 
                     if (millisInput == 0) {
                         Toast.makeText(getActivity(), "Please enter a positive number  ", Toast.LENGTH_SHORT).show();
@@ -116,7 +137,6 @@ public class TimerFragment extends Fragment {
         mButtonSet.setVisibility(View.VISIBLE);
         mStartTimeInMillis = milliseconds;
         resetTimer();
-        mButtonSet.setVisibility(View.INVISIBLE);
 
     }
 
