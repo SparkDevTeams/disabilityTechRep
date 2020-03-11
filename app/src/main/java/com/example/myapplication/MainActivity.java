@@ -36,36 +36,28 @@ public class MainActivity extends AppCompatActivity {
         View frag1 = findViewById(R.id.behavior1);
 
         View frag2 = findViewById(R.id.behavior2);
-        frag2.setBackgroundColor(Color.YELLOW);
-        //frag2.setVisibility(View.INVISIBLE);
+        frag2.setVisibility(View.INVISIBLE);
 
         View frag3 = findViewById(R.id.behavior3);
-        frag3.setBackgroundColor(Color.MAGENTA);
-        //frag3.setVisibility(View.INVISIBLE);
+        frag3.setVisibility(View.INVISIBLE);
 
         View frag4 = findViewById(R.id.behavior4);
-        frag4.setBackgroundColor(Color.RED);
-        //frag4.setVisibility(View.INVISIBLE);
+        frag4.setVisibility(View.INVISIBLE);
 
         View frag5 = findViewById(R.id.behavior5);
-        frag5.setBackgroundColor(Color.BLUE);
-        //frag5.setVisibility(View.INVISIBLE);
+        frag5.setVisibility(View.INVISIBLE);
 
         View frag6 = findViewById(R.id.behavior6);
-        frag6.setBackgroundColor(Color.GREEN);
-        //frag6.setVisibility(View.INVISIBLE);
+        frag6.setVisibility(View.INVISIBLE);
 
         View frag7 = findViewById(R.id.behavior7);
-        frag7.setBackgroundColor(Color.DKGRAY);
-        //frag7.setVisibility(View.INVISIBLE);
+        frag7.setVisibility(View.INVISIBLE);
 
         View frag8 = findViewById(R.id.behavior8);
-        frag8.setBackgroundColor(Color.LTGRAY);
-        //frag8.setVisibility(View.INVISIBLE);
+        frag8.setVisibility(View.INVISIBLE);
 
         View frag9 = findViewById(R.id.behavior9);
-        frag9.setBackgroundColor(Color.CYAN);
-        //frag9.setVisibility(View.INVISIBLE);
+        frag9.setVisibility(View.INVISIBLE);
 
         final int[] fragIds = {R.id.behavior1,R.id.behavior2,R.id.behavior3,
                          R.id.behavior4,R.id.behavior5,R.id.behavior6,

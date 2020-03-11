@@ -32,7 +32,7 @@
     <TableLayout
         android:id="@+id/buttonLayout"
         android:layout_width="match_parent"
-        android:layout_height="361dp"
+        android:layout_height="400dp"
         app:layout_constraintBottom_toTopOf="@+id/addFragmentButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
