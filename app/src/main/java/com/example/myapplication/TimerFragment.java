@@ -45,6 +45,9 @@ public class TimerFragment extends Fragment {
     public long mStartTimeInMillis;
     private long mTimeLeftInMillis = mStartTimeInMillis;
     public MediaPlayer alarmSound; //alarm sound can't be initialized in this spot for the audio -Alonzo Jasmin 2/27/2019
+    public Handler handler;
+    public Runnable countUp;
+
 
     public TimerFragment() {}
 
@@ -98,10 +101,6 @@ public class TimerFragment extends Fragment {
                     long millisInput = Long.parseLong(token[0]) * 60000;
                     millisInput += Long.parseLong(token[1]) * 1000;
 
-                    if (millisInput == 0) {
-                        Toast.makeText(getActivity(), "Please enter a positive number  ", Toast.LENGTH_SHORT).show();
-                        return;
-                    }
                     setTime(millisInput);
                     mEditTextInput.setText("");
                 } catch(Exception e) {
@@ -142,19 +141,7 @@ public class TimerFragment extends Fragment {
 
     private void startTimer() {
         if(mTimeLeftInMillis == 0){
-            final Handler handler = new Handler();
-            Runnable countUp = new Runnable() {
-                public void run() {
-                    updateCountUpText();
-                    handler.postDelayed(this, 1000);
-                }
-            };
-            handler.postDelayed(countUp, 1000);
-            mChronometerRunning = true;
-            mButtonStartPause.setText("pause");
-            mButtonReset.setVisibility(View.INVISIBLE);
-            mButtonSet.setVisibility(View.INVISIBLE);
-            mEditTextInput.setVisibility(View.INVISIBLE);
+            startChronometer();
         } else {
             mCountdownTimer = new CountDownTimer(mTimeLeftInMillis, 1000) {
                 @Override
@@ -195,7 +182,26 @@ public class TimerFragment extends Fragment {
     }
 
     private void pauseChronometer() {
-        Toast.makeText(getActivity(), "I supposed to be pausing!", Toast.LENGTH_SHORT).show();
+        mChronometerRunning = false;
+        mButtonStartPause.setText("Start");
+        mButtonReset.setVisibility(View.VISIBLE);
+        handler.removeCallbacks(countUp);
+    }
+
+    private void startChronometer(){
+        handler = new Handler();
+        countUp = new Runnable() {
+            public void run() {
+                updateCountUpText();
+                handler.postDelayed(this, 1000);
+            }
+        };
+        handler.postDelayed(countUp, 1000);
+        mChronometerRunning = true;
+        mButtonStartPause.setText("pause");
+        mButtonReset.setVisibility(View.INVISIBLE);
+        mButtonSet.setVisibility(View.INVISIBLE);
+        mEditTextInput.setVisibility(View.INVISIBLE);
     }
 
     private void resetTimer() {
