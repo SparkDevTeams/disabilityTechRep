@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ccffff"
+    android:background="@drawable/gradient_background"
     tools:context=".MainActivity">
 
     <fragment
@@ -24,6 +24,9 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         android:text="Add Behavior"
+        android:textAllCaps="false"
+        android:background="@drawable/add_btn"
+        android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

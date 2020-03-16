@@ -65,10 +65,37 @@ public class MainActivity extends AppCompatActivity {
 
         addFragButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+
                 if(fragIdTracker > 8){
                     Toast.makeText(MainActivity.this, "Max behaviors reached!", Toast.LENGTH_SHORT).show();
                 } else {
                     findViewById(fragIds[fragIdTracker]).setVisibility(View.VISIBLE);
+                    if(fragIdTracker == 1){
+                        findViewById(R.id.behavior1).findViewById(R.id.count).setBackgroundResource(R.drawable.btn_1);
+                    }
+                    else if(fragIdTracker ==2){
+                        findViewById(R.id.behavior2).findViewById(R.id.count).setBackgroundResource(R.drawable.btn_2);
+                    }
+                    else if(fragIdTracker == 3){
+                        findViewById(R.id.behavior3).findViewById(R.id.count).setBackgroundResource(R.drawable.btn_3);
+                    }
+                    else if(fragIdTracker ==4){
+                        findViewById(R.id.behavior4).findViewById(R.id.count).setBackgroundResource(R.drawable.btn_4);
+                    }
+                    else if(fragIdTracker == 5){
+                        findViewById(R.id.behavior5).findViewById(R.id.count).setBackgroundResource(R.drawable.btn_5);
+                    }
+                    else if(fragIdTracker ==6){
+                        findViewById(R.id.behavior6).findViewById(R.id.count).setBackgroundResource(R.drawable.btn_6);
+                    }
+                    else if(fragIdTracker == 7){
+                        findViewById(R.id.behavior7).findViewById(R.id.count).setBackgroundResource(R.drawable.btn_7);
+                    }
+                    else if(fragIdTracker ==8){
+                        findViewById(R.id.behavior8).findViewById(R.id.count).setBackgroundResource(R.drawable.btn_8);
+                    }
+
+
                     fragIdTracker++;
                 }
 
