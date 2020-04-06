@@ -139,7 +139,6 @@ public class bTimer extends AppCompatActivity {
                 .child(firebaseAuth.getUid()).child("Timed Sessions").child("Session");
         myRef.push().setValue(timeLeftFormatted);
 
-
         mCountdownTimer = new CountDownTimer(mTimeLeftInMillis,  1000) {
 
 

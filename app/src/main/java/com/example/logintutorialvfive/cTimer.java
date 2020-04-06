@@ -26,10 +26,12 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.Date;
 import java.util.Timer;
 
 public class cTimer extends AppCompatActivity {
 
+    private String currentSessionName = "";
 
     private EditText mEditTextInput;
     private TextView mTextViewCountdown;
@@ -131,6 +133,19 @@ public class cTimer extends AppCompatActivity {
 
     }
 
+    private void createSessionName() {
+        Date date = new Date();
+        String sessionName = "Session at " + date.toString();
+        this.currentSessionName = sessionName;
+    }
+
+    public String getSessionName() {
+        return this.currentSessionName;
+    }
+
+    private boolean isSessionNameEmpty() {
+        return this.currentSessionName.equals("");
+    }
     private void startTimer() {
 
 
@@ -139,11 +154,16 @@ public class cTimer extends AppCompatActivity {
         int minutes = (int) (mStartTimeInMillis / 1000) / 60;
         int seconds = (int) (mStartTimeInMillis / 1000) % 60;
         String timeLeftFormatted = String.format("%02d:%02d", minutes, seconds);
+
+        if(isSessionNameEmpty()) {
+            this.createSessionName();
+        }
+
         // added this v
         //String Username = getIntent().getStringExtra("User_Name");
-        DatabaseReference myRef  = FirebaseDatabase.getInstance().getReference()
-                .child(firebaseAuth.getUid()).child("Timed Sessions").child("Session");
-        myRef.push().setValue(timeLeftFormatted);
+        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference().child(firebaseAuth.getUid()).child("Timed Sessions").child(getSessionName());
+        myRef.child("Initial time remaining").setValue(timeLeftFormatted);
+
 
 
         mCountdownTimer = new CountDownTimer(mTimeLeftInMillis,  1000) {
