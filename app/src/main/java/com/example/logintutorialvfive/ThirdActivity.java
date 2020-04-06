@@ -2,6 +2,7 @@ package com.example.logintutorialvfive;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -104,6 +105,14 @@ public class ThirdActivity extends AppCompatActivity {
                 } else {
                     colCounter++;
                 }*/
+            }
+        });
+
+        Button mainMenuButton = findViewById(R.id.mainMenuButton);
+        mainMenuButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ThirdActivity.this, SecondActivity.class));
             }
         });
 
