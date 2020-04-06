@@ -49,21 +49,21 @@ public class SecondActivity extends AppCompatActivity {
                 //intent.putExtra("User_Name", getIntent().getStringExtra("User_Name"));
                 //startActivity(intent);
 
-                startActivity(new Intent(SecondActivity.this, aTimer.class));
+                startActivity(new Intent(SecondActivity.this, ThirdActivity.class));
             }
         });
         trialB = findViewById(R.id.trial2);
         trialB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(SecondActivity.this, bTimer.class));
+                startActivity(new Intent(SecondActivity.this, ThirdActivity.class));
             }
         });
         trialC = findViewById(R.id.trial3);
         trialC.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(SecondActivity.this, cTimer.class));
+                startActivity(new Intent(SecondActivity.this, ThirdActivity.class));
             }
         });
 

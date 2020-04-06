@@ -29,7 +29,7 @@ public class c3Notes extends AppCompatActivity {
         mButtonToTimerC3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(c3Notes.this, cTimer.class));
+             //   startActivity(new Intent(c3Notes.this, cTimer.class));
             }
         });
 

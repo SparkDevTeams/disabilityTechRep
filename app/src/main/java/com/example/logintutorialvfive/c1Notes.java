@@ -29,7 +29,7 @@ public class c1Notes extends AppCompatActivity {
         mButtonToTimerC1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(c1Notes.this, aTimer.class));
+              //  startActivity(new Intent(c1Notes.this, aTimer.class));
             }
         });
 
