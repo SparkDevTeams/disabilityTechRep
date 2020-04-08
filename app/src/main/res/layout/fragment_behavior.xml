@@ -46,4 +46,6 @@
         app:layout_constraintStart_toStartOf="@+id/count"
         app:layout_constraintEnd_toStartOf="@id/x"
         />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
+

@@ -15,6 +15,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
+import com.example.logintutorialvfive.R;
+
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Timer;
@@ -24,9 +27,11 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
 /*
+
  * alarmSound is being called when it's null, since it's being called
  * early. We should initialize alarm before set button gets pressed.
  * */
+
 public class TimerFragment extends Fragment {
     View v;
     private EditText mEditTextInput;
@@ -45,6 +50,7 @@ public class TimerFragment extends Fragment {
     public long mStartTimeInMillis;
     private long mTimeLeftInMillis = mStartTimeInMillis;
     private long totalTime;
+
     public MediaPlayer alarmSound; //alarm sound can't be initialized in this spot for the audio -Alonzo Jasmin 2/27/2019
     public Handler handler;
     public Runnable countUp;
@@ -55,7 +61,11 @@ public class TimerFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         //bug occured due to alarmSound not initializing earlier. Added hear to be the first step -Alonzo Jasmin 2/27/2019
+
         alarmSound = MediaPlayer.create(getActivity(), R.raw.acoustic_guitar_alarm_ringtone);
+
+        //alarmSound = MediaPlayer.create(getActivity(), R.raw.acoustic_guitar_alarm_ringtone);
+
 
         v = inflater.inflate(R.layout.timer_fragment_layout, container, false);
 
@@ -103,7 +113,9 @@ public class TimerFragment extends Fragment {
                     millisInput += Long.parseLong(token[1]) * 1000;
 
                     setTime(millisInput);
+
                     totalTime = millisInput;
+
                     mEditTextInput.setText("");
                 } catch(Exception e) {
                     System.out.println("---------ERROR on Set: "+e+" ----------");
@@ -155,7 +167,7 @@ public class TimerFragment extends Fragment {
 
                 @Override
                 public void onFinish() {
-                    //calculateRates(totalTime);
+
                     mTimerRunning = false;
                     //starts the audio once time reaches zero --Alonzo Jasmin 2/27/2020
 
@@ -224,7 +236,9 @@ public class TimerFragment extends Fragment {
             //prevents media objects to fall back and fail altogether -Alonzo Jasmin 3/2/2020
             alarmSound.release();
             //sets alarm sound back to proper media and file location -Alonzo Jasmin 3/2/2020
+
             alarmSound = MediaPlayer.create(getActivity(), R.raw.acoustic_guitar_alarm_ringtone);
+
             //System.out.println("stops music");    used for debugging -Alonzo Jasmin 2/27/2020
         }
     }
@@ -261,6 +275,7 @@ public class TimerFragment extends Fragment {
     }
 
 
+
     /*
     private long[] calculateRates(long millis){
         aTimer a = new aTimer();
@@ -269,3 +284,4 @@ public class TimerFragment extends Fragment {
         return rates;
     }*/
 }
+

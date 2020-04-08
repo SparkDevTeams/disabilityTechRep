@@ -55,7 +55,7 @@ public class RegistrationActivity extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 sendEmailVerification();
                                 //Toast.makeText(RegistrationActivity.this, "Registration Successful", Toast.LENGTH_SHORT).show();
-                                //startActivity(new Intent(RegistrationActivity.this, MainActivity.class));
+                                //startActivity(new Intent(RegistrationActivity.this, ThirdActivity.class));
                             }
                             else {
                                 Log.e("ERROR", "--------------"+task.getException() + "--------------");
@@ -183,7 +183,7 @@ public class RegistrationActivity extends AppCompatActivity {
                         finish();
 
                         // added this v
-                        //Intent intent = new Intent(RegistrationActivity.this, MainActivity.class);
+                        //Intent intent = new Intent(RegistrationActivity.this, ThirdActivity.class);
                         //intent.putExtra("User_Name",name);
                         //startActivity(intent);
 

@@ -76,8 +76,13 @@
 <!-- <?xml version="1.0" encoding="utf-8"?>
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:width="108dp"
+=======
+>>>>>>> 46aa663edd47261fb06ea23c1882d6434f726a0f
     android:height="108dp"
+    android:width="108dp"
+    android:viewportHeight="108"
     android:viewportWidth="108"
+<<<<<<< HEAD
     android:viewportHeight="108">
     <path
         android:fillColor="#008577"
@@ -243,5 +248,4 @@
         android:strokeWidth="0.8"
         android:strokeColor="#33FFFFFF" />
 </vector> -->
-
 

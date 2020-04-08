@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         // comment this if Main activity skips to second activity automatically
         if (user != null) {
             finish();
-            startActivity(new Intent(MainActivity.this, SecondActivity.class));
+            startActivity(new Intent(MainActivity.this, ThirdActivity.class));
         }
 
 
@@ -121,11 +121,11 @@ public class MainActivity extends AppCompatActivity {
 
 
             // added this v
-            //Intent intent = new Intent(MainActivity.this, SecondActivity.class);
+            //Intent intent = new Intent(ThirdActivity.this, SecondActivity.class);
             //intent.putExtra("User_Name", getIntent().getStringExtra("User_Name"));
             //startActivity(intent);
 
-            startActivity(new Intent(MainActivity.this, SecondActivity.class));
+            startActivity(new Intent(MainActivity.this, ThirdActivity.class));
         }
         else {
             Toast.makeText(this, "Verify your email", Toast.LENGTH_SHORT).show();

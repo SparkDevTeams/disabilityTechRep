@@ -15,6 +15,8 @@ import android.app.Fragment;
 import android.widget.Toast;
 
 
+import com.example.logintutorialvfive.R;
+
 //ButtonFragment class that has the fragment of the counter
 public class ButtonFragment extends Fragment implements View.OnClickListener {
     public ButtonFragment() {
@@ -40,6 +42,7 @@ public class ButtonFragment extends Fragment implements View.OnClickListener {
             public void onClick(View v) {
                 counter++;
                 btn.setText(String.valueOf(counter));
+
             }
         });
 
@@ -71,4 +74,5 @@ public class ButtonFragment extends Fragment implements View.OnClickListener {
     public String getBehavior() {
         return bhv.getText().toString();
     }
+
 }
