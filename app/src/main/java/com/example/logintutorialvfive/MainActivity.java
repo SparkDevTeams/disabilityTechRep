@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         // comment this if Main activity skips to second activity automatically
         if (user != null) {
             finish();
-            startActivity(new Intent(MainActivity.this, ThirdActivity.class));
+            startActivity(new Intent(MainActivity.this, SecondActivity.class));
         }
 
 

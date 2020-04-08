@@ -19,6 +19,10 @@ public class ThirdActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         //Timer stuff
         super.onCreate(savedInstanceState);
+
+        Bundle b = getIntent().getExtras();
+        int id = b.getInt("clientNumber");
+        System.out.println(id);
         setContentView(R.layout.activity_third);
         final TableLayout buttonLayout = (TableLayout) findViewById(R.id.buttonLayout);
 

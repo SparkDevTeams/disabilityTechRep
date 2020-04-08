@@ -49,21 +49,27 @@ public class SecondActivity extends AppCompatActivity {
                 //intent.putExtra("User_Name", getIntent().getStringExtra("User_Name"));
                 //startActivity(intent);
 
-                startActivity(new Intent(SecondActivity.this, ThirdActivity.class));
+                Intent intent = new Intent(SecondActivity.this, ThirdActivity.class);
+                intent.putExtra("clientNumber", 1);
+                startActivity(intent);
             }
         });
         trialB = findViewById(R.id.trial2);
         trialB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(SecondActivity.this, ThirdActivity.class));
+                Intent intent = new Intent(SecondActivity.this, ThirdActivity.class);
+                intent.putExtra("clientNumber", 2);
+                startActivity(intent);
             }
         });
         trialC = findViewById(R.id.trial3);
         trialC.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(SecondActivity.this, ThirdActivity.class));
+                Intent intent = new Intent(SecondActivity.this, ThirdActivity.class);
+                intent.putExtra("clientNumber", 3);
+                startActivity(intent);
             }
         });
 
