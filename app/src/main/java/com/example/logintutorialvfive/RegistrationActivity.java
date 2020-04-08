@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.*;
 import android.view.*;
 import android.content.*;
@@ -57,6 +58,7 @@ public class RegistrationActivity extends AppCompatActivity {
                                 //startActivity(new Intent(RegistrationActivity.this, MainActivity.class));
                             }
                             else {
+                                Log.e("ERROR", "--------------"+task.getException() + "--------------");
                                 Toast.makeText(RegistrationActivity.this, "Registration Failed", Toast.LENGTH_SHORT).show();
                             }
                         }

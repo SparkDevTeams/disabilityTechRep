@@ -2,206 +2,123 @@ package com.example.logintutorialvfive;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
+import android.graphics.Color;
 import android.os.Bundle;
-
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.os.Bundle;
-
 import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
-import java.util.Timer;
-
 public class bTimer extends AppCompatActivity {
 
-
-    private EditText mEditTextInput;
-    private TextView mTextViewCountdown;
-    private Button mButtonSet;
-    private Button mButtonStartPause;
-    private Button mButtonReset;
-    private Button mButtonToMain;
-    private Button mButtonToNotesC2;
-
-    private ProgressBar mProgressBar;
-    private CountDownTimer mCountdownTimer;
-
-
-    private boolean mTimerRunning;
-    public long mStartTimeInMillis;
-    private long mTimeLeftInMillis = mStartTimeInMillis;
+    int colCounter = 0;
+    int rowCounter = 0;
+    int fragIdTracker = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //Timer stuff
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_b_timer);
+        final TableLayout buttonLayout = (TableLayout) findViewById(R.id.buttonLayout);
 
-        mEditTextInput =findViewById(R.id.edit_text_input);
 
-        mTextViewCountdown = findViewById(R.id.text_view_countdown);
+        Button addFragButton = findViewById(R.id.addFragmentButton);
+        View frag1 = findViewById(R.id.behavior1);
 
-        mProgressBar = findViewById(R.id.progressbar);
-        mProgressBar.setProgress(100);
+        View frag2 = findViewById(R.id.behavior2);
+        frag2.setVisibility(View.INVISIBLE);
 
-        mButtonSet = findViewById(R.id.button_set);
+        View frag3 = findViewById(R.id.behavior3);
+        frag3.setVisibility(View.INVISIBLE);
 
-        mButtonStartPause = findViewById(R.id.start_pause_button);
-        mButtonReset = findViewById(R.id.reset_button);
+        View frag4 = findViewById(R.id.behavior4);
+        frag4.setVisibility(View.INVISIBLE);
 
-        mButtonSet.setOnClickListener(new View.OnClickListener() {
-            @Override
+        View frag5 = findViewById(R.id.behavior5);
+        frag5.setVisibility(View.INVISIBLE);
+
+        View frag6 = findViewById(R.id.behavior6);
+        frag6.setVisibility(View.INVISIBLE);
+
+        View frag7 = findViewById(R.id.behavior7);
+        frag7.setVisibility(View.INVISIBLE);
+
+        View frag8 = findViewById(R.id.behavior8);
+        frag8.setVisibility(View.INVISIBLE);
+
+        View frag9 = findViewById(R.id.behavior9);
+        frag9.setVisibility(View.INVISIBLE);
+
+        final int[] fragIds = {R.id.behavior1,R.id.behavior2,R.id.behavior3,
+                R.id.behavior4,R.id.behavior5,R.id.behavior6,
+                R.id.behavior7,R.id.behavior8,R.id.behavior9};
+
+        addFragButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-                String input = mEditTextInput.getText().toString();
-                if(input.length() ==  0) {
-                    Toast.makeText(bTimer.this, "Field can't be empty.", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                long millisInput = Long.parseLong(input) * 60000;
-
-                if(millisInput == 0) {
-                    Toast.makeText(bTimer.this, "Please enter a positive number  ", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                setTime(millisInput);
-                mEditTextInput.setText("");
-
-            }
-        });
-        mButtonStartPause.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mTimerRunning) {
-                    pauseTimer();
+                if(fragIdTracker > 8){
+                    Toast.makeText(bTimer.this, "Max behaviors reached!", Toast.LENGTH_SHORT).show();
                 } else {
-                    startTimer();
+                    findViewById(fragIds[fragIdTracker]).setVisibility(View.VISIBLE);
+                    if(fragIdTracker == 1){
+                        findViewById(R.id.behavior1).findViewById(R.id.count).setBackgroundResource(R.drawable.btn_1);
+                    }
+                    else if(fragIdTracker ==2){
+                        findViewById(R.id.behavior2).findViewById(R.id.count).setBackgroundResource(R.drawable.btn_2);
+                    }
+                    else if(fragIdTracker == 3){
+                        findViewById(R.id.behavior3).findViewById(R.id.count).setBackgroundResource(R.drawable.btn_3);
+                    }
+                    else if(fragIdTracker ==4){
+                        findViewById(R.id.behavior4).findViewById(R.id.count).setBackgroundResource(R.drawable.btn_4);
+                    }
+                    else if(fragIdTracker == 5){
+                        findViewById(R.id.behavior5).findViewById(R.id.count).setBackgroundResource(R.drawable.btn_5);
+                    }
+                    else if(fragIdTracker ==6){
+                        findViewById(R.id.behavior6).findViewById(R.id.count).setBackgroundResource(R.drawable.btn_6);
+                    }
+                    else if(fragIdTracker == 7){
+                        findViewById(R.id.behavior7).findViewById(R.id.count).setBackgroundResource(R.drawable.btn_7);
+                    }
+                    else if(fragIdTracker ==8){
+                        findViewById(R.id.behavior8).findViewById(R.id.count).setBackgroundResource(R.drawable.btn_8);
+                    }
+
+
+                    fragIdTracker++;
                 }
+
+
+                /*FragmentManager fragmentManager= getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                TableRow row = new TableRow(getApplicationContext());
+                row.setId(rowCounter);
+                ButtonFragment buttonFrag = new ButtonFragment();
+                fragmentTransaction.add(rowCounter,buttonFrag);
+                fragmentTransaction.commit();
+                buttonLayout.addView(row);
+                if(colCounter == 3){
+                    rowCounter++;
+                    colCounter = 0;
+                } else {
+                    colCounter++;
+                }*/
             }
         });
 
-        mButtonReset.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                resetTimer();
-            }
-        });
-        updateCountDownText();
-
-        mButtonToMain = findViewById(R.id.mainButton); //connects t xml
-        mButtonToMain.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(bTimer.this, SecondActivity.class));
-            }
-        });
-
-        mButtonToNotesC2 = findViewById(R.id.btnToC2Notes); //connects t xml
-        mButtonToNotesC2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(bTimer.this, c2Notes.class));
-            }
-        });
-
+        //End Fragment stuff
     }
-
-    private void setTime(long milliseconds) {
-        mEditTextInput.setVisibility(View.VISIBLE);
-        mButtonSet.setVisibility(View.VISIBLE);
-        mStartTimeInMillis = milliseconds;
-        resetTimer();
-        mButtonSet.setVisibility(View.INVISIBLE);
-
-    }
-
-    private void startTimer() {
-
-
-        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-        // added this
-        int minutes = (int) (mStartTimeInMillis / 1000) / 60;
-        int seconds = (int) (mStartTimeInMillis / 1000) % 60;
-        String timeLeftFormatted = String.format("%02d:%02d", minutes, seconds);
-        // added this v
-        //String Username = getIntent().getStringExtra("User_Name");
-        DatabaseReference myRef  = FirebaseDatabase.getInstance().getReference()
-                .child(firebaseAuth.getUid()).child("Timed Sessions").child("Session");
-        myRef.push().setValue(timeLeftFormatted);
-
-
-        mCountdownTimer = new CountDownTimer(mTimeLeftInMillis,  1000) {
-
-
-            @Override
-            public void onTick(long millisUntilFinished) {
-                mTimeLeftInMillis = millisUntilFinished;
-                updateCountDownText();
-                updateProgressBar();
-            }
-
-
-            @Override
-            public void onFinish() {
-                mTimerRunning = false;
-                mButtonStartPause.setText("Start");
-                mButtonStartPause.setVisibility(View.INVISIBLE);
-                mButtonReset.setVisibility(View.VISIBLE);
-            }
-        }.start();
-
-        mTimerRunning = true;
-        mButtonStartPause.setText("pause");
-        mButtonReset.setVisibility(View.INVISIBLE);
-        mButtonSet.setVisibility(View.INVISIBLE);
-        mEditTextInput.setVisibility(View.INVISIBLE);
-    }
-
-    private void pauseTimer() {
-        mCountdownTimer.cancel();
-        mTimerRunning = false;
-        mButtonStartPause.setText("Start");
-        mButtonReset.setVisibility(View.VISIBLE);
-    }
-
-    private void resetTimer() {
-        mButtonSet.setVisibility(View.VISIBLE);
-        mEditTextInput.setVisibility(View.VISIBLE);
-        mTimeLeftInMillis = mStartTimeInMillis;
-        updateCountDownText();
-        mButtonReset.setVisibility(View.INVISIBLE);
-        mButtonStartPause.setVisibility(View.VISIBLE);
-
-    }
-
-    private void updateCountDownText() {
-        int minutes = (int) (mTimeLeftInMillis / 1000) / 60;
-        int seconds = (int) (mTimeLeftInMillis / 1000) % 60;
-
-        String timeLeftFormatted = String.format("%02d:%02d", minutes, seconds);
-
-        mTextViewCountdown.setText(timeLeftFormatted);
-    }
-
-    private void updateProgressBar() {
-        int progress = (int) (mTimeLeftInMillis * 100)/ (int) mStartTimeInMillis;
-        mProgressBar.setProgress(progress);
-    }
-
-
-
-
-
 
 
 }
