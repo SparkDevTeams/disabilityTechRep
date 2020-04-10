@@ -275,7 +275,6 @@ public class TimerFragment extends Fragment {
     }
 
 
-
     /*
     private long[] calculateRates(long millis){
         aTimer a = new aTimer();

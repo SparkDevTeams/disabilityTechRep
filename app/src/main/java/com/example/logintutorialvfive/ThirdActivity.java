@@ -2,6 +2,7 @@ package com.example.logintutorialvfive;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -25,7 +26,6 @@ public class ThirdActivity extends AppCompatActivity {
         System.out.println(id);
         setContentView(R.layout.activity_third);
         final TableLayout buttonLayout = (TableLayout) findViewById(R.id.buttonLayout);
-
 
         Button addFragButton = findViewById(R.id.addFragmentButton);
         View frag1 = findViewById(R.id.behavior1);
@@ -112,6 +112,8 @@ public class ThirdActivity extends AppCompatActivity {
             }
         });
 
+        setupTimerFragments();
+
         Button mainMenuButton = findViewById(R.id.mainMenuButton);
         mainMenuButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -121,6 +123,27 @@ public class ThirdActivity extends AppCompatActivity {
         });
 
         //End Fragment stuff
+    }
+
+    public void setupTimerFragments() {
+        FragmentManager manager = getFragmentManager();
+
+        int[] fragmentIDs = {
+                R.id.behavior1,
+                R.id.behavior2,
+                R.id.behavior3,
+                R.id.behavior4,
+                R.id.behavior5,
+                R.id.behavior6,
+                R.id.behavior7,
+                R.id.behavior8,
+                R.id.behavior9
+        };
+
+        for(int k = 0; k < fragmentIDs.length; k++) {
+            ButtonFragment fragment = (ButtonFragment)manager.findFragmentById(fragmentIDs[k]);
+            fragment.setName("behavior" + (k + 1));
+        }
     }
 
 

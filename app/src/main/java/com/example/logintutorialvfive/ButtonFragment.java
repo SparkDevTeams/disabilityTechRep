@@ -28,6 +28,7 @@ public class ButtonFragment extends Fragment implements View.OnClickListener {
     Button btn;
     Button bck;
     int counter = 0;
+    private String name = "Blank name"; //leaving this here to make it easier to spot issues
 
     //Counter, backtrack counter and name behavior button.
     @Override
@@ -73,6 +74,10 @@ public class ButtonFragment extends Fragment implements View.OnClickListener {
 
     public String getBehavior() {
         return bhv.getText().toString();
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
 }
