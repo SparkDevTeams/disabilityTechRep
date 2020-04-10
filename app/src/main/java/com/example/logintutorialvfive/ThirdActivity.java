@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.Toast;
 
+import java.util.Date;
+
 public class ThirdActivity extends AppCompatActivity {
 
     int colCounter = 0;
@@ -21,9 +23,8 @@ public class ThirdActivity extends AppCompatActivity {
         //Timer stuff
         super.onCreate(savedInstanceState);
 
-        Bundle b = getIntent().getExtras();
-        int id = b.getInt("clientNumber");
-        System.out.println(id);
+
+
         setContentView(R.layout.activity_third);
         final TableLayout buttonLayout = (TableLayout) findViewById(R.id.buttonLayout);
 
@@ -112,7 +113,12 @@ public class ThirdActivity extends AppCompatActivity {
             }
         });
 
-        setupTimerFragments();
+        String sessionName = "Session at " + new Date().toString();
+        Bundle b = getIntent().getExtras();
+        int id = b.getInt("clientNumber");
+
+        setupTimerFragment(sessionName, id);
+        setupButtonFragments(sessionName, id);
 
         Button mainMenuButton = findViewById(R.id.mainMenuButton);
         mainMenuButton.setOnClickListener(new View.OnClickListener() {
@@ -125,7 +131,7 @@ public class ThirdActivity extends AppCompatActivity {
         //End Fragment stuff
     }
 
-    public void setupTimerFragments() {
+    public void setupButtonFragments(String sessionID, int clientNumber) {
         FragmentManager manager = getFragmentManager();
 
         int[] fragmentIDs = {
@@ -143,7 +149,13 @@ public class ThirdActivity extends AppCompatActivity {
         for(int k = 0; k < fragmentIDs.length; k++) {
             ButtonFragment fragment = (ButtonFragment)manager.findFragmentById(fragmentIDs[k]);
             fragment.setName("behavior" + (k + 1));
+            fragment.setClientNumber(clientNumber);
+            fragment.setSessionTime(sessionID);
         }
+    }
+
+    public void setupTimerFragment(String sessionID, int clientNumber) {
+        ;
     }
 
 

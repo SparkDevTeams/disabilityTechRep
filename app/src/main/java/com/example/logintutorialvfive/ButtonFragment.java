@@ -16,9 +16,15 @@ import android.widget.Toast;
 
 
 import com.example.logintutorialvfive.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 //ButtonFragment class that has the fragment of the counter
 public class ButtonFragment extends Fragment implements View.OnClickListener {
+    private int clientNumber;
+    private String sessionTime;
+
     public ButtonFragment() {
         // Required empty public constructor
     }
@@ -43,7 +49,13 @@ public class ButtonFragment extends Fragment implements View.OnClickListener {
             public void onClick(View v) {
                 counter++;
                 btn.setText(String.valueOf(counter));
+                FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
 
+                // added this v
+                //String Username = getIntent().getStringExtra("User_Name");
+                DatabaseReference myRef  = FirebaseDatabase.getInstance().getReference()
+                        .child(firebaseAuth.getUid()).child("Timed Sessions").child("Client " + clientNumber).child(sessionTime).child(name);
+                myRef.setValue(counter);
             }
         });
 
@@ -78,6 +90,14 @@ public class ButtonFragment extends Fragment implements View.OnClickListener {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void setClientNumber(int number) {
+        this.clientNumber = number;
+    }
+
+    public void setSessionTime(String session) {
+        this.sessionTime = session;
     }
 
 }
