@@ -149,13 +149,17 @@ public class ThirdActivity extends AppCompatActivity {
         for(int k = 0; k < fragmentIDs.length; k++) {
             ButtonFragment fragment = (ButtonFragment)manager.findFragmentById(fragmentIDs[k]);
             fragment.setName("behavior" + (k + 1));
-            fragment.setClientNumber(clientNumber);
             fragment.setSessionTime(sessionID);
+            fragment.setClientNumber(clientNumber);
+
         }
     }
 
     public void setupTimerFragment(String sessionID, int clientNumber) {
-        ;
+        FragmentManager manager = getFragmentManager();
+        TimerFragment timer = (TimerFragment)manager.findFragmentById(R.id.list);
+        timer.setSessionTime(sessionID);
+        timer.setClientNumber(clientNumber);
     }
 
 

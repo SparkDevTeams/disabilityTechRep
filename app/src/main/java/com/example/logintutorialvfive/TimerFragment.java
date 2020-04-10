@@ -17,6 +17,9 @@ import android.widget.Toast;
 
 
 import com.example.logintutorialvfive.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -55,6 +58,8 @@ public class TimerFragment extends Fragment {
     public Handler handler;
     public Runnable countUp;
 
+    private int clientNumber;
+    private String sessionTime;
 
     public TimerFragment() {}
 
@@ -153,10 +158,24 @@ public class TimerFragment extends Fragment {
 
     }
 
+    private void setDatabaseValue(String key, Object value) {
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+
+        // added this v
+        //String Username = getIntent().getStringExtra("User_Name");
+        DatabaseReference myRef  = FirebaseDatabase.getInstance().getReference()
+                .child(firebaseAuth.getUid()).child("Timed Sessions").child("Client " + clientNumber).child(sessionTime).child(key);
+        myRef.setValue(value);
+    }
+
     private void startTimer() {
+
+
         if(mTimeLeftInMillis == 0){
             startChronometer();
         } else {
+            setDatabaseValue("Duration", formatTimeLeft(mTimeLeftInMillis));
+            setDatabaseValue("Session finished", false); //Mark session as not finished
             mCountdownTimer = new CountDownTimer(mTimeLeftInMillis, 1000) {
                 @Override
                 public void onTick(long millisUntilFinished) {
@@ -167,7 +186,8 @@ public class TimerFragment extends Fragment {
 
                 @Override
                 public void onFinish() {
-
+                    //Mark session as finished
+                    setDatabaseValue("Session finished", true);
                     mTimerRunning = false;
                     //starts the audio once time reaches zero --Alonzo Jasmin 2/27/2020
 
@@ -243,12 +263,16 @@ public class TimerFragment extends Fragment {
         }
     }
 
-    private void updateCountDownText() {
-        int minutes = (int) (mTimeLeftInMillis / 1000) / 60;
-        int seconds = (int) (mTimeLeftInMillis / 1000) % 60;
+    public static String formatTimeLeft(long milliseconds) {
+        int minutes = (int) (milliseconds / 1000) / 60;
+        int seconds = (int) (milliseconds / 1000) % 60;
 
         String timeLeftFormatted = String.format("%02d:%02d", minutes, seconds);
+        return timeLeftFormatted;
+    }
 
+    private void updateCountDownText() {
+        String timeLeftFormatted = formatTimeLeft(mTimeLeftInMillis);
         mTextViewCountdown.setText(timeLeftFormatted);
     }
 
@@ -274,6 +298,13 @@ public class TimerFragment extends Fragment {
         mProgressBar.setProgress(progress);
     }
 
+    public void setClientNumber(int number) {
+        this.clientNumber = number;
+    }
+
+    public void setSessionTime(String session) {
+        this.sessionTime = session;
+    }
 
     /*
     private long[] calculateRates(long millis){
